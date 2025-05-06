@@ -11,5 +11,6 @@
         void UpdateBill(Bill bill);
         void DeleteBill(int billId);
         void SaveChanges();
+
     }
 }

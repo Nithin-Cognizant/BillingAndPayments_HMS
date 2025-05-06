@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="BillDate" class="control-label"></label>
-                <input asp-for="BillDate" class="form-control" />
+                <input asp-for="BillDate" class="form-control" id="BillDate"/>
                 <span asp-validation-for="BillDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,8 +44,21 @@
     <a asp-action="Show">Back to Bills</a>
 </div>
 
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var billDateInput = document.getElementById('BillDate');
+            if (billDateInput) {
+                var today = new Date();
+                var year = today.getFullYear();
+                var month = (today.getMonth() + 1).toString().padStart(2, '0');
+                var day = today.getDate().toString().padStart(2, '0');
+                billDateInput.value = `${year}-${month}-${day}`;
+            }
+        });
+    </script>
 }
