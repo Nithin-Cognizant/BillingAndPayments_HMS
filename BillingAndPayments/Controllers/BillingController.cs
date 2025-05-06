@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BillingAndPayments.Models;
+﻿using BillingAndPayments.BusinessLogic.Interfaces;
+using BillingAndPayments.Repository.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 
@@ -7,33 +8,30 @@ namespace BillingAndPaymentsModule.Controllers
 {
     public class BillingController : Controller
     {
-        public readonly BillingContext _context;
+        private readonly IBillService _billService; // Declare the field
 
-        public BillingController(BillingContext context)
+        // Constructor to inject IBillService
+        public BillingController(IBillService billService)
         {
-            _context = context;
+            _billService = billService; // Initialize the field
         }
 
         public IActionResult Index(int billId = 0)
         {
             Bill bill = new Bill();
             ViewBag.Action = "Submit";
+
             if (billId > 0)
             {
-                var data = (from b in _context.Bills
-                            where b.BillId == billId
-                            select b).ToList();
-                if (billId > 0)
+                var existingBill = _billService.GetBillById(billId);
+                if (existingBill != null)
                 {
-                    bill.BillId = data[0].BillId;
-                    bill.PatientId = data[0].PatientId;
-                    bill.TotalAmount = data[0].TotalAmount;
-                    bill.PaymentStatus = data[0].PaymentStatus;
-                    bill.BillDate = data[0].BillDate;
+                    bill = existingBill;
                     ViewBag.Action = "Update";
                 }
             }
 
+            // Fix for CS0411: Explicitly specify the type argument for Cast<T>()
             ViewBag.PaymentStatusList = new SelectList(Enum.GetValues(typeof(PaymentStatus)).Cast<PaymentStatus>());
             return View(bill);
         }
@@ -41,32 +39,19 @@ namespace BillingAndPaymentsModule.Controllers
         [HttpPost]
         public IActionResult Index(Bill bill)
         {
-            if (bill.BillId > 0)
-            {
-                _context.Entry(bill).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            }
-            else
-            {
-                _context.Bills.Add(bill);
-            }
-
-            _context.SaveChanges();
+            _billService.SaveBill(bill);
             return RedirectToAction("Show");
         }
 
         public IActionResult Show()
         {
-            var data = _context.Bills.ToList();
+            var data = _billService.GetAllBills();
             return View(data);
         }
 
         public IActionResult Delete(int billId)
         {
-            var bill = _context.Bills.Find(billId);
-          
-                _context.Bills.Remove(bill);
-               _context.SaveChanges();
-            
+            _billService.DeleteBill(billId);
             return RedirectToAction("Show");
         }
     }
