@@ -1,8 +1,59 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Billing & Payments Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="jumbotron bg-gradient-primary text-white rounded-3 shadow-lg p-5">
+        <h1 class="display-4 fw-bold"><i class="bi bi-cash-coin me-3"></i> Streamline Your Billing & Payments</h1>
+        <p class="lead">Effortlessly manage your invoices, track payments, and gain financial insights with our modern billing and payments system.</p>
+        <hr class="my-4">
+        <p>Get started today and experience a smoother, more efficient way to handle your finances.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a asp-controller="Billing" asp-action="Index" class="btn btn-lg btn-light rounded-pill shadow-sm"><i class="bi bi-plus-circle-fill me-2"></i> Create New Bill</a>
+            <a asp-controller="Billing" asp-action="Show" class="btn btn-lg btn-outline-light rounded-pill shadow-sm ms-md-3"><i class="bi bi-list-ul me-2"></i> View All Bills</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm rounded-3 border-0 h-100">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-receipt-cutoff display-4 text-primary mb-3"></i>
+                    <h5 class="card-title fw-semibold">Easy Invoice Generation</h5>
+                    <p class="card-text text-secondary">Create professional-looking invoices quickly and easily with our intuitive interface.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm rounded-3 border-0 h-100">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-credit-card display-4 text-success mb-3"></i>
+                    <h5 class="card-title fw-semibold">Secure Payment Tracking</h5>
+                    <p class="card-text text-secondary">Monitor payment statuses, record transactions, and stay on top of your receivables.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm rounded-3 border-0 h-100">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-graph-up display-4 text-info mb-3"></i>
+                    <h5 class="card-title fw-semibold">Financial Insights</h5>
+                    <p class="card-text text-secondary">Gain valuable insights into your financial performance with clear and concise reports.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css">
+    <style>
+        .bg-gradient-primary {
+            background: linear-gradient(to right, #007bff, #6610f2); /* A subtle blue-purple gradient */
+        }
+
+        .jumbotron p {
+            font-size: 1.1rem;
+        }
+    </style>
+}
