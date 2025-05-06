@@ -39,7 +39,7 @@ namespace BillingAndPaymentsModule.Controllers
         [HttpPost]
         public IActionResult Index(Bill bill)
         {
-            _billService.SaveBill(bill);
+            _billService.SaveBill(bill); // Use the SaveBill method of the service
             return RedirectToAction("Show");
         }
 

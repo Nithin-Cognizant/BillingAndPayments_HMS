@@ -44,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.BillDate)
                 </td>
                 <td>
-                    <a asp-action="Index" asp-route-id="@item.BillId">Edit</a> 
+                    <a asp-action="Index" asp-route-billId="@item.BillId">Edit</a>
                     <a asp-action="Delete" asp-route-billId="@item.BillId">Delete</a>
                 </td>
             </tr>

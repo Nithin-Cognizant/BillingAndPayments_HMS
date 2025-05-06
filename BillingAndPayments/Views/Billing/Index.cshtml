@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@ViewBag.Action Bill</h1>
 
 <h4>Bill</h4>
 <hr />
@@ -12,6 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BillId" />
             <div class="form-group">
                 <label asp-for="PatientId" class="control-label"></label>
                 <input asp-for="PatientId" class="form-control" />
@@ -33,14 +34,14 @@
                 <span asp-validation-for="BillDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="@ViewBag.Action" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Show">Back to Bills</a>
 </div>
 
 @section Scripts {
