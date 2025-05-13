@@ -15,6 +15,7 @@ builder.Services.AddDbContext<BillingContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 // Replace "DefaultConnection" with your actual connection string
+// This is 
 
 // Register your repository and service
 builder.Services.AddScoped<IBillRepository, BillRepository>();
