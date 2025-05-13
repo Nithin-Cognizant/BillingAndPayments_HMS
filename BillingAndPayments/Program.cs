@@ -14,9 +14,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BillingContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Replace "DefaultConnection" with your actual connection string
 
 // Register your repository and service
