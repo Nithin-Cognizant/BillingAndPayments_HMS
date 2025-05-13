@@ -5,8 +5,8 @@ namespace BillingAndPayments.Repository.Repositories;
 
 public class DoctorRepository : IDoctorRepository
 {
-    private readonly AppDbContext _context;
-    public DoctorRepository(AppDbContext context)
+    private readonly BillingContext _context;
+    public DoctorRepository(BillingContext context)
     {
         _context = context;
     }
