@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-pink">Welcome @TempData["DoctorName"]!</h2>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-pink">
+                <div class="card-header bg-pink text-white">
+                    <h5 class="mb-0">Profile</h5>
+                </div>
+                <div class="card-body">
+                    <p>View and manage your personal information.</p>
+                    <a asp-action="ViewProfile" asp-controller="Doctor" class="btn btn-outline-pink btn-sm">View Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-pink">
+                <div class="card-header bg-pink text-white">
+                    <h5 class="mb-0">Availability</h5>
+                </div>
+                <div class="card-body">
+                    <p>Manage your consultation schedule and availability.</p>
+                    <a asp-action="EditAvailability" asp-controller="Doctor" class="btn btn-outline-pink btn-sm">Edit Availability</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-pink">
+                <div class="card-header bg-pink text-white">
+                    <h5 class="mb-0">Appointments</h5>
+                </div>
+                <div class="card-body">
+                    <p>View your upcoming and past appointments.</p>
+                    <a href="#" class="btn btn-outline-pink btn-sm">View Appointments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="@Url.Action("LogOut", "Doctor")" class="btn btn-danger mt-3">Log Out</a>
+</div>
+
+<style>
+    .bg-pink {
+        background-color: #FF69B4 !important; /* Hot Pink */
+    }
+
+    .btn-pink {
+        background-color: #FF69B4;
+        border-color: #FF69B4;
+        color: white;
+    }
+
+    .btn-pink:hover {
+        background-color: #FF1493; /* Deep Pink */
+        border-color: #FF1493;
+        color: white;
+    }
+
+    .border-pink {
+        border-color: #FF69B4 !important;
+    }
+
+    .text-pink {
+        color: #FF69B4 !important;
+    }
+
+    .btn-outline-pink {
+        color: #FF69B4;
+        border-color: #FF69B4;
+    }
+
+    .btn-outline-pink:hover {
+        background-color: #FF69B4;
+        color: white;
+        border-color: #FF69B4;
+    }
+</style>

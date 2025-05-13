@@ -1,0 +1,128 @@
+﻿@model DoctorManagementSystem.UI.Models.DoctorRegisterViewModel
+
+@{
+    ViewData["Title"] = "Doctor Registration";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Register" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label">Full Name:</label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email:</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Password:</label>
+                            <input asp-for="Password" class="form-control" type="password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">Phone Number:</label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Speciality" class="form-label">Speciality:</label>
+                            <input asp-for="Speciality" class="form-control" />
+                            <span asp-validation-for="Speciality" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Qualification" class="form-label">Qualification:</label>
+                            <input asp-for="Qualification" class="form-control" />
+                            <span asp-validation-for="Qualification" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ExperienceYears" class="form-label">Experience (Years):</label>
+                            <input asp-for="ExperienceYears" class="form-control" type="number" />
+                            <span asp-validation-for="ExperienceYears" class="text-danger"></span>
+                        </div>
+
+                        <h4>Availability Slots</h4>
+                        <div id="availability-container">
+                            @for (int i = 0; i < Model.Availabilities.Count; i++)
+                            {
+                                <div class="availability-group mb-3 border p-3 rounded">
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-md-5">
+                                            <label asp-for="Availabilities[@i].Day" class="form-label">Day:</label>
+                                            <input asp-for="Availabilities[@i].Day" class="form-control" placeholder="e.g., Monday" />
+                                            <span asp-validation-for="Availabilities[@i].Day" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Availabilities[@i].TimeSlot" class="form-label">Time Slot:</label>
+                                            <input asp-for="Availabilities[@i].TimeSlot" class="form-control" placeholder="e.g., 10 AM - 12 PM" />
+                                            <span asp-validation-for="Availabilities[@i].TimeSlot" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger remove-slot">Remove</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <button type="button" id="add-slot" class="btn btn-secondary mb-3">+ Add Availability</button>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById("add-slot").addEventListener("click", function () {
+            const container = document.getElementById("availability-container");
+            const index = container.querySelectorAll(".availability-group").length;
+            const html = `
+                <div class="availability-group mb-3 border p-3 rounded">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-5">
+                            <label class="form-label">Day:</label>
+                            <input name="Availabilities[\${index}].Day" class="form-control" placeholder="e.g., Monday" />
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label">Time Slot:</label>
+                            <input name="Availabilities[\${index}].TimeSlot" class="form-control" placeholder="e.g., 10 AM - 12 PM" />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger remove-slot">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML("beforeend", html);
+        });
+
+        document.addEventListener("click", function (e) {
+            if (e.target.classList.contains("remove-slot")) {
+                e.target.closest(".availability-group").remove();
+            }
+        });
+    </script>
+}
