@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BillingAndPayments.Repository.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(BillingContext))]
     [Migration("20250513095232_a2")]
     partial class a2
     {
